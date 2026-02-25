@@ -7,7 +7,9 @@
     "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
-    "test": "jest --coverage",
+    "test": "jest --coverage --testPathIgnorePatterns=integration",
+    "test:integration": "jest --testPathPatterns=integration --forceExit --detectOpenHandles",
+    "test:all": "jest --coverage --forceExit --detectOpenHandles",
     "test:watch": "jest --watch"
   },
   "keywords": [],
