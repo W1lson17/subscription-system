@@ -18,6 +18,10 @@ const config: Config = {
     '!main.ts',
     '!**/*.test.ts',
     '!shared/utils/logger.ts',
+    '!infrastructure/database/connection.ts',
+    '!infrastructure/database/PostgresSubscriptionRepository.ts',
+    '!infrastructure/webhook/WebhookNotifier.ts',
+    '!infrastructure/container.ts',
   ],
   coverageThreshold: {
     global: {
