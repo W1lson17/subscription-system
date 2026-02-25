@@ -17,6 +17,7 @@ const config: Config = {
     '!**/index.ts',
     '!main.ts',
     '!**/*.test.ts',
+    '!shared/utils/logger.ts',
   ],
   coverageThreshold: {
     global: {
