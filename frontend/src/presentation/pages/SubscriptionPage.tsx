@@ -1,10 +1,6 @@
 import { SubscriptionForm } from '@/presentation/components/subscription/SubscriptionForm'
-import { SubscriptionDashboard } from '@/presentation/components/subscription/SubscriptionDashboard'
-import { useSubscriptionStore } from '@/application/subscription/useSubscriptionStore'
 
 export const SubscriptionPage = () => {
-  const { currentSubscription } = useSubscriptionStore()
-
   return (
     <div className="container mx-auto py-10 px-4 space-y-8">
       <div className="text-center">
@@ -13,12 +9,7 @@ export const SubscriptionPage = () => {
           Manage your premium subscription
         </p>
       </div>
-
-      {currentSubscription ? (
-        <SubscriptionDashboard subscription={currentSubscription} />
-      ) : (
-        <SubscriptionForm />
-      )}
+      <SubscriptionForm />
     </div>
   )
 }

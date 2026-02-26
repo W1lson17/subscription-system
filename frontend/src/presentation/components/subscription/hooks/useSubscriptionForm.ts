@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { toast } from 'sonner'
+import { useNavigate } from 'react-router'
 import { useCreateSubscription } from '@/application/subscription/useSubscription'
 import { useSubscriptionStore } from '@/application/subscription/useSubscriptionStore'
-import { toast } from 'sonner'
 
 export const subscriptionSchema = z.object({
   userId: z.string().min(1, { message: 'User ID is required' }),
@@ -20,6 +21,7 @@ export type SubscriptionFormValues = z.infer<typeof subscriptionSchema>
 export const useSubscriptionForm = () => {
   const { mutate, isPending } = useCreateSubscription()
   const { setCurrentSubscription, addNotification } = useSubscriptionStore()
+  const navigate = useNavigate()
 
   const form = useForm<SubscriptionFormValues>({
     resolver: zodResolver(subscriptionSchema),
@@ -38,6 +40,7 @@ export const useSubscriptionForm = () => {
         addNotification('Payment successful! Your subscription is now active.', 'success')
         toast.success('Subscription created successfully!')
         form.reset()
+        navigate(`/dashboard/${data.id}`)
       },
       onError: (error) => {
         addNotification(error.message, 'error')
