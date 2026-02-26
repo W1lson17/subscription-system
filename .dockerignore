@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+**/node_modules
+
+# builds
+dist
+**/dist
+
+# git
+.git
+.gitignore
+
+# env files
+.env
+.env.prod
+!.env.example
+!.env.prod.example
+
+# logs
+npm-debug.log
+pnpm-debug.log
+
+# docker
+docker-compose*
+
+# coverage
+coverage
+**/coverage
