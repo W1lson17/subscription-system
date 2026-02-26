@@ -51,7 +51,7 @@ export const SubscriptionForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="john@example.com" type="email" {...field} />
+                    <Input placeholder="john@example.com" type="text" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
