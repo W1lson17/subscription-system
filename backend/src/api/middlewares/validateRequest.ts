@@ -1,11 +1,21 @@
-import { Request, Response, NextFunction } from 'express';
-import { ZodType, ZodError } from 'zod';
+import { Request, Response, NextFunction } from 'express'
+import { ZodType, ZodError } from 'zod'
 
-export const validateRequest = (schema: ZodType) => {
+interface ValidationSchemas {
+  body?: ZodType
+  params?: ZodType
+}
+
+export const validateRequest = (schemas: ValidationSchemas) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     try {
-      req.body = schema.parse(req.body);
-      next();
+      if (schemas.body) {
+        req.body = schemas.body.parse(req.body)
+      }
+      if (schemas.params) {
+        req.params = schemas.params.parse(req.params) as Record<string, string>
+      }
+      next()
     } catch (error) {
       if (error instanceof ZodError) {
         res.status(400).json({
@@ -15,10 +25,10 @@ export const validateRequest = (schema: ZodType) => {
             field: e.path.join('.'),
             message: e.message,
           })),
-        });
-        return;
+        })
+        return
       }
-      next(error);
+      next(error)
     }
-  };
-};
+  }
+}
