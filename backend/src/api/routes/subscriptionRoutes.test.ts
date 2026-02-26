@@ -59,16 +59,25 @@ describe('Subscription Routes', () => {
 
   describe('GET /api/subscriptions/:id', () => {
     it('should pass id to controller', async () => {
+      const validId = 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
+
       mockGetById.mockImplementation((_req, res) => {
-        res.status(200).json({ status: 'success', data: { id: 'sub-123' } });
-      });
+        res.status(200).json({ status: 'success', data: { id: validId } })
+      })
 
-      const response = await request(app).get('/api/subscriptions/sub-123');
+      const response = await request(app).get(`/api/subscriptions/${validId}`)
 
-      expect(response.status).toBe(200);
-      expect(mockGetById).toHaveBeenCalledTimes(1);
-    });
-  });
+      expect(response.status).toBe(200)
+      expect(mockGetById).toHaveBeenCalledTimes(1)
+    })
+
+    it('should return 400 when id is not a valid UUID', async () => {
+      const response = await request(app).get('/api/subscriptions/invalid-id')
+
+      expect(response.status).toBe(400)
+      expect(mockGetById).not.toHaveBeenCalled()
+    })
+  })
 
   describe('404 handler', () => {
     it('should return 404 for unknown routes', async () => {

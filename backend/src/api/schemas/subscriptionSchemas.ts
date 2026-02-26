@@ -10,4 +10,8 @@ export const createSubscriptionSchema = z.object({
   amount: z.number().positive('Amount must be greater than zero'),
 });
 
+export const getSubscriptionSchema = z.object({
+  id: z.string().uuid('Invalid subscription ID format'),
+})
+
 export type CreateSubscriptionRequest = z.infer<typeof createSubscriptionSchema>;
