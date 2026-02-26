@@ -13,6 +13,7 @@ export const useSubscriptionForm = () => {
 
   const form = useForm<SubscriptionFormValues>({
     resolver: zodResolver(subscriptionSchema),
+    mode: 'onBlur',
     defaultValues: {
       userId: '',
       userEmail: '',
