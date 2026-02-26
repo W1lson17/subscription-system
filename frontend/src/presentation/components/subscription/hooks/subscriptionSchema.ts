@@ -7,7 +7,7 @@ export const subscriptionSchema = z.object({
   paymentMethod: z.enum(['CREDIT_CARD', 'DEBIT_CARD', 'PAYPAL'], {
     message: 'Please select a payment method',
   }),
-  amount: z.coerce.number().positive({ message: 'Amount must be greater than zero' }),
+  amount: z.coerce.number<number>().positive({ message: 'Amount must be greater than zero' }),
 })
 
 export type SubscriptionFormValues = z.infer<typeof subscriptionSchema>
